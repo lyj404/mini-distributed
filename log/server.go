@@ -13,7 +13,8 @@ var log *stlog.Logger
 // string类型的别名
 type fileLog string
 
-// Write 将数据写入到文件日志中。
+// 自定义日志类型
+// 实现 io.Writer 接口中的 Write() 方法 将日志写入文件中
 // 它打开文件以进行写入，如果文件不存在，则创建文件。
 // 参数:
 //   data []byte: 需要写入文件的日志数据。
@@ -40,7 +41,7 @@ func (fl fileLog) Write(data []byte) (int, error) {
 // 它使用stlog包中的New函数创建一个日志器，将文件日志记录器与"go"格式和标准标志LstdFlags组合。
 // destination: 日志文件的目标路径。
 func Run(destination string) {
-	log = stlog.New(fileLog(destination), "go: ", stlog.LstdFlags)
+	log = stlog.New(fileLog(destination), "[go]: ", stlog.LstdFlags)
 }
 
 // RegisterHandlers 向HTTP服务器注册处理日志请求的处理器。
@@ -63,6 +64,7 @@ func RegisterHandlers() {
         default:
             // 如果请求方法不是POST，则返回405 Method Not Allowed。
             w.WriteHeader(http.StatusMethodNotAllowed)
+            return
         }
     })
 }
@@ -72,5 +74,6 @@ func RegisterHandlers() {
 // 参数:
 //   message - 需要记录的消息字符串。
 func write(message string) {
+    // 将日志写到目标位置
 	log.Printf("%v\n", message)
 }

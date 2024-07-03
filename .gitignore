@@ -24,3 +24,6 @@ go.work.sum
 # IDEs
 .idea
 .vscode
+
+# 忽略日志
+*.log

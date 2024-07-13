@@ -5,22 +5,29 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/lyj404/mini-distributed/registry"
 )
 
 // 服务注册
-func Start(ctx context.Context, serviceName, host, port string,
+func Start(ctx context.Context, host, port string, reg registry.Registration,
 	 registerHandlersFunc func()) (context.Context, error){
 	// 运行注册函数
 	registerHandlersFunc()
 
 	// 启动service
-	ctx = startService(ctx, serviceName, host, port)
+	ctx = startService(ctx, reg.ServiceName, host, port)
 
+	err := registry.RegisterService(reg)
+	if err != nil {
+		return ctx, err
+	}
+	
 	return ctx, nil
 }
 
 // 服务启动
-func startService(ctx context.Context, serviceName, host, port string) context.Context{
+func startService(ctx context.Context, serviceName registry.ServiceName, host, port string) context.Context{
 	// 创建一个具有取消功能的上下文
 	ctx, cancel := context.WithCancel(ctx)
 

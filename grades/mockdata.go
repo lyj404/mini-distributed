@@ -9,12 +9,12 @@ func init() {
 			Grades: []Grade{
 				{
 					Title: "Math",
-					Srocde: 100,
+					Score: 100,
 					Type: GradeExam,
 				},
 				{
 					Title: "English",
-					Srocde: 100,
+					Score: 100,
 					Type: GradeExam,
 				},
 			},
@@ -26,12 +26,12 @@ func init() {
 			Grades: []Grade{
 				{
 					Title: "Math",
-					Srocde: 90,
+					Score: 90,
 					Type: GradeExam,
 				},
 				{
 					Title: "English",
-					Srocde: 70,
+					Score: 70,
 					Type:GradeExam,
 				},
 			},

@@ -12,10 +12,10 @@ type Student struct {
 	Grades []Grade
 }
 
-func (s Student) average() float32{
+func (s Student) Average() float32{
 	var result float32
 	for _, grade := range s.Grades {
-		result += grade.Srocde
+		result += grade.Score
 	}
 
 	return result / float32(len(s.Grades))
@@ -49,5 +49,5 @@ const (
 type Grade struct {
 	Title string
 	Type GradeType
-	Srocde float32
+	Score float32
 }

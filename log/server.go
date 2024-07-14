@@ -41,7 +41,7 @@ func (fl fileLog) Write(data []byte) (int, error) {
 // 它使用stlog包中的New函数创建一个日志器，将文件日志记录器与"go"格式和标准标志LstdFlags组合。
 // destination: 日志文件的目标路径。
 func Run(destination string) {
-	log = stlog.New(fileLog(destination), "[go]: ", stlog.LstdFlags)
+	log = stlog.New(fileLog(destination), "[go] - ", stlog.LstdFlags)
 }
 
 // RegisterHandlers 向HTTP服务器注册处理日志请求的处理器。
